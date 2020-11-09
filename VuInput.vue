@@ -35,6 +35,8 @@
         }
 
     Expands to a dataType specific input element. This directive expects a $scope.schema to describe the dataType.
+
+    Copyright (c) SenseDeep. All Rights Reserved.
 -->
 <template>
     <div class="vu-input">
@@ -172,10 +174,6 @@ export default class VuInput extends Vue {
 
     @Watch('value', {immediate: true, deep: true})
     prep() {
-        /* Remove for modifying rules from VuInputGroup
-        if (this.value == this.emit && this.displayType) {
-            return
-        } */
         this.setup()
         let dataType = this.dataType ||  this.getType(this.value)
         this.displayType = this.type || dataToType[dataType]
