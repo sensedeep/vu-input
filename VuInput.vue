@@ -42,7 +42,7 @@
     <div class="vu-input">
         <!-- error-messages messages success-messages autofocus -->
         <v-text-field
-            v-if="displayType == 'label'" :type="type" disabled
+            v-if="displayType == 'label'" :type="type" disabled hide-details
             v-model="displayValue" :class="inputClass"
             :name="name" :label="displayLabel" :placeholder="placeholder" :prefix="prefix" :suffix="suffix">
         </v-text-field>
@@ -146,7 +146,7 @@ const dataToRules = {
 @Component
 export default class VuInput extends Vue {
     @Prop({type: String}) auto
-    @Prop({type: String, default: 'text'}) name
+    @Prop({type: String}) name
     @Prop({type: String}) dataType
     @Prop(Boolean) disabled
     @Prop({type: String, default: ''}) inputClass
@@ -213,6 +213,7 @@ export default class VuInput extends Vue {
     }
 
     getType(value) {
+        //  MOB - should we allow Boolean, String, ...
         if (typeof value == 'boolean') {
             return 'boolean'
         } else if (typeof value == 'string') {
@@ -232,7 +233,7 @@ export default class VuInput extends Vue {
     /*
         Split pascal case letters into separate words
      */
-    makeTitle(str) {
+    makeTitle(str = '') {
         str = str.replace(/[A-Z][a-zA-Z0-9$_]*/g, ' $&');
         let words = str.split(/[ \.]/g)
         for (var i = 0; i < words.length; i++) {
